@@ -53,8 +53,8 @@ count and `AVG(Accessible)` is a rate, with no `CASE` wrapper needed.
 Requires Python 3.9+ (3.10+ for the type hints as written).
 
 ```bash
-git clone <your-fork-url>
-cd toilet-project
+git clone https://github.com/DevFrancisA/australian-public-toilets-sql.git
+cd australian-public-toilets-sql
 
 python -m venv .venv
 source .venv/bin/activate        # Windows: .venv\Scripts\activate
