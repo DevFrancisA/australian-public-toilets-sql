@@ -254,59 +254,6 @@ a query's result set, on a map, with the filters still adjustable.
 
 ---
 
-## SQL techniques demonstrated
-
-* `GROUP BY` on single and composite keys (`GROUP BY Town, State`)
-* `HAVING` to filter on aggregates — on counts, on rates, and on both at once
-* **Conditional aggregation** — `SUM(CASE WHEN … THEN 1 ELSE 0 END)` to build
-  cross-tabs, and `AVG(flag)` as a rate over 0/1 columns
-* **Scalar subqueries** in the `SELECT` list to supply a whole-table denominator
-  without a join (queries 2 and 4)
-* **CTEs** (`WITH`) — for pre-normalising dirty labels (12), for computing a
-  benchmark and comparing against it (13), and for naming a derived score so it
-  can be reused in `WHERE` and `ORDER BY` (14)
-* `CROSS JOIN` against a one-row CTE — the idiomatic way to attach a global
-  benchmark to every group
-* **Free-text pattern matching** with `LIKE` on the `OpeningHours` column
-* **Aggregate geometry** — `MIN`/`MAX`/`AVG` over coordinates for bounding boxes,
-  centroids and spans
-* `COALESCE` for null-safe grouping labels, `ROUND` for presentation
-* Multi-condition boolean filters combining flag columns and text patterns
-* Indexing the columns that the analytical queries group and filter on
-
----
-
-## Possible next steps
-
-* **Join to population data.** Toilets per 100,000 residents by LGA would turn
-  raw counts into a provision measure. ABS Census data keyed on postcode or LGA
-  would do it, and would make the "which towns are underserved" question
-  defensible rather than suggestive.
-* **Add real spatial queries.** Load the coordinates into SpatiaLite or PostGIS
-  and ask distance questions: nearest accessible toilet to any point, coverage
-  gaps along highways, how far apart the 24-hour facilities are on a given route.
-* **Nearest-neighbour desert analysis.** Even without PostGIS, a haversine
-  calculation would identify the longest stretch of highway with no facility —
-  the single most useful output for a traveller.
-* **Track changes over time.** The site publishes fresh exports; loading several
-  into date-stamped tables would show which councils are adding accessible
-  facilities and which are closing toilets.
-* **Clean the geography.** Reverse-geocode the coordinates and flag every row
-  whose `State` disagrees, rather than catching only the four obvious outliers.
-* **Normalise the schema.** Split the 29 flags into a tidy
-  `facility_id / feature / value` table, which makes "top N features by state"
-  a single `GROUP BY` instead of 29 hand-written columns.
-* **Mine the note columns.** `AccessNote`, `ToiletNote` and `OpeningHoursNote`
-  hold thousands of rows of free text about temporary closures and access
-  quirks — a keyword pass would surface facilities that are listed as open but
-  described as closed.
-* **Make the map fully queryable.** The panel covers fixed filters; a free-form
-  SQL box in the browser would need the database reachable from the page —
-  either a small FastAPI layer over `toilets.db`, or sql.js loading the SQLite
-  file directly in the browser with no server at all.
-
----
-
 ## Project layout
 
 ```
