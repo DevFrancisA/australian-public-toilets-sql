@@ -1,0 +1,7 @@
+# Data loading and CSV parsing
+pandas>=2.0
+
+# Interactive Leaflet maps (MarkerCluster / HeatMap plugins ship with it)
+folium>=0.15
+
+# sqlite3 is in the Python standard library - nothing to install for the DB.

@@ -1,0 +1,26 @@
+# Generated database - rebuild it with `python load_data.py`
+toilets.db
+*.sqlite
+*.sqlite3
+
+# Generated maps and any other rendered HTML
+*.html
+
+# Raw data export (12 MB; download your own from toiletmap.gov.au)
+toiletmapexport*.csv
+*.csv
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.python-version
+
+# Editors and OS cruft
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
